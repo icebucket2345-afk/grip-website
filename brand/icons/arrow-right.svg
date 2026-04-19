@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Arrow right">
+  <line x1="12" y1="40" x2="64" y2="40" stroke="currentColor" stroke-width="3" stroke-linecap="round"></line>
+  <polyline points="50,24 66,40 50,56" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+</svg>

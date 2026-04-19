@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-label="Grip — find your fourth">
+  <defs>
+    
+  </defs>
+  <text x="20" y="105" class="w">gr<tspan class="i">i</tspan>p</text>
+  <circle cx="330" cy="100" r="11" fill="#C66B4A"></circle>
+  <line x1="365" y1="40" x2="365" y2="120" stroke="#1A1F1C" stroke-opacity="0.15" stroke-width="1"></line>
+  <text x="385" y="78" class="t">Find your</text>
+  <text x="385" y="105" class="t"><tspan class="ti">fourth.</tspan></text>
+</svg>

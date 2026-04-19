@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Golf ball">
+  <circle cx="40" cy="40" r="38" fill="currentColor"></circle>
+  <g fill="#1A1F1C" fill-opacity="0.12">
+    <circle cx="28" cy="22" r="2.2"></circle>
+    <circle cx="40" cy="20" r="2.2"></circle>
+    <circle cx="52" cy="22" r="2.2"></circle>
+    <circle cx="22" cy="32" r="2.2"></circle>
+    <circle cx="34" cy="30" r="2.2"></circle>
+    <circle cx="46" cy="30" r="2.2"></circle>
+    <circle cx="58" cy="32" r="2.2"></circle>
+    <circle cx="20" cy="44" r="2.2"></circle>
+    <circle cx="32" cy="42" r="2.2"></circle>
+    <circle cx="44" cy="42" r="2.2"></circle>
+    <circle cx="56" cy="44" r="2.2"></circle>
+    <circle cx="24" cy="54" r="2.2"></circle>
+    <circle cx="36" cy="52" r="2.2"></circle>
+    <circle cx="48" cy="52" r="2.2"></circle>
+    <circle cx="28" cy="62" r="2.2"></circle>
+    <circle cx="40" cy="62" r="2.2"></circle>
+    <circle cx="52" cy="62" r="2.2"></circle>
+  </g>
+</svg>

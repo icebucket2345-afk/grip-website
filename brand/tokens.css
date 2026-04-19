@@ -1,0 +1,177 @@
+/* ============================================================
+   Grip — Design Tokens
+   Import once at the root of any page: @import "brand/tokens.css";
+   ============================================================ */
+
+:root {
+  /* ---------- Color ---------- */
+  --grip-fairway:     #2F5D4A;  /* Primary */
+  --grip-fairway-2:   #24493A;  /* Hover / pressed */
+  --grip-fairway-1:   #3D7560;  /* Light tint */
+
+  --grip-cream:       #F4EEE0;  /* Ground / background */
+  --grip-cream-deep:  #EAE1CB;  /* Secondary surface */
+  --grip-cream-2:     #FAF6EC;  /* Elevated surface */
+
+  --grip-ink:         #1A1F1C;  /* Body text, dark surfaces */
+  --grip-ink-70:      rgba(26,31,28,0.70);
+  --grip-ink-55:      rgba(26,31,28,0.55);
+  --grip-ink-40:      rgba(26,31,28,0.40);
+  --grip-ink-12:      rgba(26,31,28,0.12);
+
+  --grip-sunset:      #C66B4A;  /* Accent — use sparingly */
+  --grip-moss:        #7A8B6A;  /* Support */
+
+  /* Semantic roles */
+  --grip-bg:          var(--grip-cream);
+  --grip-surface:     #FFFFFF;
+  --grip-text:        var(--grip-ink);
+  --grip-text-muted:  var(--grip-ink-55);
+  --grip-rule:        var(--grip-ink-12);
+  --grip-primary:     var(--grip-fairway);
+  --grip-on-primary:  var(--grip-cream);
+  --grip-accent:      var(--grip-sunset);
+
+  /* ---------- Type ---------- */
+  --grip-font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --grip-font-sans:    'DM Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  --grip-font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* Sizes — fluid but simple */
+  --grip-fs-display:  88px;
+  --grip-fs-h1:       56px;
+  --grip-fs-h2:       40px;
+  --grip-fs-h3:       28px;
+  --grip-fs-lead:     22px;
+  --grip-fs-body:     15px;
+  --grip-fs-small:    13px;
+  --grip-fs-mono:     11px;
+
+  /* Tracking */
+  --grip-track-display: -0.035em;
+  --grip-track-heading: -0.025em;
+  --grip-track-body:     0;
+  --grip-track-mono:     0.08em;
+
+  /* Line heights */
+  --grip-lh-tight:  1.0;
+  --grip-lh-heading: 1.1;
+  --grip-lh-body:   1.55;
+
+  /* ---------- Spacing ---------- */
+  --grip-sp-1:  4px;
+  --grip-sp-2:  8px;
+  --grip-sp-3:  12px;
+  --grip-sp-4:  16px;
+  --grip-sp-5:  24px;
+  --grip-sp-6:  32px;
+  --grip-sp-7:  48px;
+  --grip-sp-8:  64px;
+  --grip-sp-9:  96px;
+
+  /* ---------- Radius ---------- */
+  --grip-rad-sm:  8px;
+  --grip-rad-md:  14px;
+  --grip-rad-lg:  18px;
+  --grip-rad-xl:  24px;
+  --grip-rad-pill: 999px;
+
+  /* ---------- Shadow ---------- */
+  --grip-shadow-1: 0 1px 0 rgba(0,0,0,0.04);
+  --grip-shadow-2: 0 10px 30px -15px rgba(26,31,28,0.20);
+  --grip-shadow-3: 0 20px 50px -20px rgba(26,31,28,0.30);
+
+  /* ---------- Motion ---------- */
+  --grip-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --grip-dur-fast: 150ms;
+  --grip-dur-base: 240ms;
+  --grip-dur-slow: 400ms;
+}
+
+/* ============================================================
+   Base resets + type defaults
+   ============================================================ */
+.grip-body {
+  background: var(--grip-bg);
+  color: var(--grip-text);
+  font-family: var(--grip-font-sans);
+  font-size: var(--grip-fs-body);
+  line-height: var(--grip-lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.grip-display { font-family: var(--grip-font-display); font-weight: 400; letter-spacing: var(--grip-track-display); line-height: var(--grip-lh-tight); }
+.grip-h1      { font-family: var(--grip-font-display); font-weight: 400; font-size: var(--grip-fs-h1); letter-spacing: var(--grip-track-heading); line-height: var(--grip-lh-heading); }
+.grip-h2      { font-family: var(--grip-font-display); font-weight: 500; font-size: var(--grip-fs-h2); letter-spacing: var(--grip-track-heading); line-height: var(--grip-lh-heading); }
+.grip-h3      { font-family: var(--grip-font-display); font-weight: 500; font-size: var(--grip-fs-h3); letter-spacing: var(--grip-track-heading); line-height: var(--grip-lh-heading); }
+.grip-lead    { font-family: var(--grip-font-sans);    font-weight: 500; font-size: var(--grip-fs-lead); line-height: 1.3; letter-spacing: -0.01em; }
+.grip-body    { font-family: var(--grip-font-sans);    font-weight: 400; font-size: var(--grip-fs-body); line-height: var(--grip-lh-body); }
+.grip-mono    { font-family: var(--grip-font-mono);    font-weight: 500; font-size: var(--grip-fs-mono); letter-spacing: var(--grip-track-mono); text-transform: uppercase; }
+.grip-italic  { font-style: italic; font-weight: 300; color: var(--grip-fairway); }
+
+/* ============================================================
+   Core components
+   ============================================================ */
+
+/* Buttons */
+.grip-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--grip-font-sans); font-weight: 500; font-size: 14px;
+  padding: 12px 22px; border-radius: var(--grip-rad-pill);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background var(--grip-dur-base) var(--grip-ease), color var(--grip-dur-base) var(--grip-ease), border-color var(--grip-dur-base) var(--grip-ease);
+  text-decoration: none;
+}
+.grip-btn-primary   { background: var(--grip-fairway); color: var(--grip-cream); }
+.grip-btn-primary:hover { background: var(--grip-fairway-2); }
+.grip-btn-secondary { background: transparent; color: var(--grip-ink); border-color: var(--grip-ink-12); }
+.grip-btn-secondary:hover { background: var(--grip-ink); color: var(--grip-cream); border-color: var(--grip-ink); }
+.grip-btn-ghost     { background: transparent; color: var(--grip-ink); }
+.grip-btn-ghost:hover { background: var(--grip-ink-12); }
+
+/* Tag / pill */
+.grip-tag {
+  display: inline-flex; align-items: center;
+  font-family: var(--grip-font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 10px; border-radius: var(--grip-rad-pill);
+  background: var(--grip-ink-12); color: var(--grip-text);
+}
+.grip-tag-primary { background: var(--grip-fairway); color: var(--grip-cream); }
+.grip-tag-accent  { background: var(--grip-sunset);  color: var(--grip-cream); }
+
+/* Card */
+.grip-card {
+  background: var(--grip-surface);
+  border-radius: var(--grip-rad-lg);
+  box-shadow: var(--grip-shadow-1);
+  padding: var(--grip-sp-6);
+}
+.grip-card-cream { background: var(--grip-cream-deep); }
+.grip-card-ink   { background: var(--grip-ink); color: var(--grip-cream); }
+.grip-card-green { background: var(--grip-fairway); color: var(--grip-cream); }
+
+/* Input */
+.grip-input {
+  width: 100%;
+  background: var(--grip-surface);
+  border: 1px solid var(--grip-ink-12);
+  border-radius: var(--grip-rad-md);
+  padding: 14px 16px;
+  font-family: var(--grip-font-sans); font-size: 15px;
+  color: var(--grip-text);
+  transition: border-color var(--grip-dur-fast) var(--grip-ease);
+}
+.grip-input:focus { outline: none; border-color: var(--grip-fairway); }
+
+/* Avatar */
+.grip-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--grip-cream-deep);
+  color: var(--grip-fairway);
+  font-family: var(--grip-font-display); font-weight: 500; font-size: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+/* Divider */
+.grip-rule { height: 1px; background: var(--grip-rule); border: none; }

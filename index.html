@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Grip — Find Your Perfect Golf Partner. Connect with golfers near you, book tee times, and play more golf across the UK and EU." />
+  <title>Grip — Find Your Perfect Golf Partner</title>
+  <link rel="icon" type="image/svg+xml" href="brand/logo/grip-favicon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo" aria-label="Grip home">
+        <img src="brand/logo/grip-wordmark-inverse.svg" alt="Grip" />
+      </a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#preview">Preview</a>
+        <a href="#download" class="nav-cta">Get the app</a>
+      </div>
+      <button class="menu-btn" id="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#preview">Preview</a>
+      <a href="#download" class="nav-cta" style="text-align:center;">Get the app</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>Launching in the UK App Store</div>
+        <h1>Find your <em>perfect</em> playing partner.</h1>
+        <p class="sub">Grip connects golfers who actually want to play — same course, same day, same pace. Skip the solo tee time.</p>
+
+        <p class="waitlist-label">Be first to know when we launch</p>
+        <form class="waitlist-form" id="waitlist-form" novalidate>
+          <label for="waitlist-email" style="position:absolute;left:-9999px;">Email</label>
+          <input id="waitlist-email" name="email" type="email" placeholder="your@email.com" required autocomplete="email" />
+          <button type="submit">Notify me</button>
+        </form>
+        <p class="waitlist-msg" id="waitlist-msg" aria-live="polite"></p>
+        <p class="free-tag">Free to download · iOS &amp; Android</p>
+      </div>
+
+      <div class="mockup-wrap">
+        <div class="mockup" role="img" aria-label="Example match card from the Grip app">
+          <div class="mockup-top">
+            <span><span class="dot"></span>New match</span>
+            <span>Sat · 9:42 AM</span>
+          </div>
+          <div class="mockup-title">You and <em>James</em> match on handicap &amp; tempo.</div>
+          <div class="mockup-row">
+            <div class="mockup-ava">JM</div>
+            <div style="flex:1;">
+              <div class="mockup-who">James Morrison</div>
+              <div class="mockup-meta">HCP 14 · Richmond Park</div>
+            </div>
+          </div>
+          <div class="mockup-row">
+            <div class="mockup-ava" style="background:var(--grip-fairway);color:var(--grip-cream);">YO</div>
+            <div style="flex:1;">
+              <div class="mockup-who">You</div>
+              <div class="mockup-meta">HCP 16 · SW London</div>
+            </div>
+          </div>
+          <div class="mockup-cta">Request a round →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">How it works</div>
+        <h2>Three steps. <em>Then you're on the tee.</em></h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="num">0<em>1</em></div><h3>Build your profile</h3><p>Handicap, home course, how you like to play. Takes two minutes.</p></div>
+        <div class="step"><div class="num">0<em>2</em></div><h3>Find your match</h3><p>Golfers nearby, filtered by schedule, skill and pace. No lurkers.</p></div>
+        <div class="step"><div class="num">0<em>3</em></div><h3>Book &amp; play</h3><p>Message, agree a tee time, get out and play. That's the whole thing.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="feats-wrap section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Features</div>
+        <h2>Everything you need, <em>nothing you don't.</em></h2>
+      </div>
+      <div class="feats">
+        <div class="feat">
+          <div class="feat-icon"><img src="brand/icons/pair.svg" alt="" /></div>
+          <h3>Smart matching</h3>
+          <p>Matched on handicap, availability and tempo — not just proximity.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><img src="brand/icons/pin.svg" alt="" /></div>
+          <h3>Trips mode</h3>
+          <p>Heading somewhere new? Flag your dates and play with locals.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><img src="brand/icons/chat.svg" alt="" /></div>
+          <h3>Real-time chat</h3>
+          <p>Agree the tee time, the stakes and the pre-round coffee — in-app.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><img src="brand/icons/flag.svg" alt="" /></div>
+          <h3>Course database</h3>
+          <p>Courses, ranges and simulators across the UK, with live availability.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><img src="brand/icons/handshake.svg" alt="" /></div>
+          <h3>Respectful community</h3>
+          <p>Clear guidelines, active moderation. Play the ball, not the man.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-icon"><img src="brand/icons/check.svg" alt="" /></div>
+          <h3>Verified handicaps <span class="badge">Soon</span></h3>
+          <p>Official handicap linking, so you know the 12 is actually a 12.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="container">
+      <p class="q">Golf is <em>better</em> with the right playing partner.</p>
+      <p class="attrib">— Grip, everywhere, always</p>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="section" id="preview">
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">Preview</div>
+        <h2>A quick look <em>inside.</em></h2>
+      </div>
+    </div>
+
+    <div class="shots-scroll" id="shots-scroll" role="region" aria-label="App screens">
+      <div class="shot">
+        <div class="shot-tag">01 · Profile</div>
+        <div class="shot-title">Show <em>who</em> you are on the course.</div>
+        <div class="shot-body">
+          <div class="shot-chip"><span class="ava">TW</span><span><b>Tom W.</b> · HCP 12</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sunset);">RP</span><span>Home: Richmond Park</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sky);">PL</span><span>Pace: steady · 4hrs</span></div>
+          <div class="shot-cta">Edit profile</div>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot-tag">02 · Discover</div>
+        <div class="shot-title">Golfers near you, <em>ready now.</em></div>
+        <div class="shot-body">
+          <div class="shot-chip"><span class="ava">JM</span><span><b>James</b> · 1.2mi · Sat AM</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sunset);">SR</span><span><b>Sarah</b> · 2.4mi · Sun PM</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sky);">DL</span><span><b>Dan</b> · 3.1mi · Weekdays</span></div>
+          <div class="shot-cta">See all matches</div>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot-tag">03 · Messages</div>
+        <div class="shot-title">Sort it out, <em>then tee it up.</em></div>
+        <div class="shot-body">
+          <div class="shot-chip" style="background:var(--grip-fairway);color:var(--grip-cream);">Sat 9:42 sound good?</div>
+          <div class="shot-chip" style="justify-content:flex-end;">Perfect — meet at the halfway?</div>
+          <div class="shot-chip" style="background:var(--grip-fairway);color:var(--grip-cream);">Done. See you there.</div>
+          <div class="shot-cta">Open chat</div>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot-tag">04 · Courses</div>
+        <div class="shot-title">Every fairway <em>within reach.</em></div>
+        <div class="shot-body">
+          <div class="shot-chip"><span class="ava">RP</span><span><b>Richmond Park</b> · 9 min</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sunset);">WS</span><span><b>Wimbledon</b> · 14 min</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sky);">CH</span><span><b>Chessington</b> · 22 min</span></div>
+          <div class="shot-cta">Open map</div>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot-tag">05 · Trips</div>
+        <div class="shot-title">Play anywhere <em>you travel.</em></div>
+        <div class="shot-body">
+          <div class="shot-chip"><span class="ava">ED</span><span><b>Edinburgh</b> · Apr 12–14</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sunset);">LI</span><span><b>Lisbon</b> · May 3–7</span></div>
+          <div class="shot-chip">12 golfers available</div>
+          <div class="shot-cta">Plan a trip</div>
+        </div>
+      </div>
+      <div class="shot">
+        <div class="shot-tag">06 · Community</div>
+        <div class="shot-title">A room full of <em>your people.</em></div>
+        <div class="shot-body">
+          <div class="shot-chip"><span class="ava">LH</span><span>London Hackers · 218</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sunset);">SL</span><span>Single Ladies · 94</span></div>
+          <div class="shot-chip"><span class="ava" style="background:var(--grip-sky);">EG</span><span>Early Risers · 312</span></div>
+          <div class="shot-cta">Join a group</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shot-ctrl">
+      <button class="shot-btn" id="shots-prev" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="shot-dots" id="shots-dots"></div>
+      <button class="shot-btn" id="shots-next" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD CTA -->
+  <section class="section" id="download" style="padding-top:0;">
+    <div class="cta-wrap">
+      <h2>Ready to <em>find your four?</em></h2>
+      <p>Join golfers across the UK and EU. Grip is free — always will be for matchmaking.</p>
+      <div class="cta-badges">
+        <a href="#" class="cta-badge" aria-label="Download on App Store — coming soon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+          <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;">
+            <span class="store-small">Download on</span>
+            <span class="store-big">App Store</span>
+          </span>
+        </a>
+        <a href="#" class="cta-badge" aria-label="Get it on Google Play — coming soon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 2.3C3.2 2.5 3 2.9 3 3.5v17c0 .5.2 1 .6 1.2l10.4-10L3.6 2.3zM16 10.5l2.7-1.5 2.4 1.4c.6.3.6 1.2 0 1.5l-2.4 1.4-2.7-1.5 2.2-1.3-2.2-1zM5 22l10-9.5 2.3 2.2L6 22.2c-.3.1-.7.1-1 0L5 22zm0-20l12.3 7.2L15 11.5 5 2c.3-.1.7-.1 1 0l-1 0z"/></svg>
+          <span style="display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;">
+            <span class="store-small">Get it on</span>
+            <span class="store-big">Google Play</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot">
+    <div class="container">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <svg class="wm" viewBox="0 0 260 64" width="112" height="28" aria-label="Grip">
+            <text x="0" y="50" font-family="var(--grip-font-display)" font-size="64" fill="var(--grip-fairway)" letter-spacing="-2">gr<tspan font-style="italic" font-weight="300">i</tspan>p</text>
+            <circle cx="200" cy="48" r="6" fill="var(--grip-sunset)"/>
+          </svg>
+          <p style="margin-top:14px;">Find your perfect golf partner. Play more golf, with the right people.</p>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="guidelines.html">Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:support@gripgolfapp.com">support@gripgolfapp.com</a></li>
+          </ul>
+          <div class="foot-social" style="margin-top:14px;">
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 2.7.27.28 2.69.08 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1012 18.16 6.16 6.16 0 0012 5.84zm0 10.16A4 4 0 1112 8a4 4 0 010 8zm6.41-11.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg></a>
+            <a href="#" aria-label="X"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 2.25h3.31l-7.23 8.26L23 22h-6.66l-5.22-6.82L4.99 22H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23zM17.08 19.77h1.83L7.08 4.13H5.12z"/></svg></a>
+            <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 11-2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 106.33 6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.79-.07z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Grip</span>
+        <span>Made for golfers</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

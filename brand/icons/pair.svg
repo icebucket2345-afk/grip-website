@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Two people">
+  <circle cx="30" cy="28" r="9" fill="currentColor"></circle>
+  <path d="M12 62 C12 50 20 44 30 44 C40 44 48 50 48 62 Z" fill="currentColor"></path>
+  <circle cx="54" cy="32" r="7" fill="currentColor" opacity="0.55"></circle>
+  <path d="M40 62 C40 52 46 48 54 48 C62 48 68 52 68 62 Z" fill="currentColor" opacity="0.55"></path>
+</svg>
