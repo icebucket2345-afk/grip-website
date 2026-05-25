@@ -1,5 +1,6 @@
 # macOS
 .DS_Store
+**/.DS_Store
 
 # Editor
 .vscode/
@@ -16,3 +17,20 @@ build/
 .env
 .env.local
 minervini*
+
+# Expo / React Native (mobile app files — do not commit to website repo)
+app.json
+eas.json
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Logs
+*.log
+npm-debug.log*
+
+# Windows
+Thumbs.db
