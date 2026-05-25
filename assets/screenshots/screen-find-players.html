@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390">
+<title>Grip – Find Players</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --fairway:     #2F5D4A;
+    --fairway-2:   #24493A;
+    --fairway-1:   #3D7560;
+    --cream:       #F4EEE0;
+    --cream-deep:  #EAE1CB;
+    --cream-2:     #FAF6EC;
+    --ink:         #1A1F1C;
+    --ink-70:      rgba(26,31,28,0.70);
+    --ink-55:      rgba(26,31,28,0.55);
+    --ink-40:      rgba(26,31,28,0.40);
+    --ink-12:      rgba(26,31,28,0.12);
+    --sunset:      #C66B4A;
+    --moss:        #7A8B6A;
+    --surface:     #FFFFFF;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans:    'DM Sans', system-ui, sans-serif;
+  }
+
+  html, body {
+    width: 390px;
+    height: 844px;
+    overflow: hidden;
+    background: var(--cream);
+    font-family: var(--font-sans);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .screen {
+    width: 390px;
+    height: 844px;
+    display: flex;
+    flex-direction: column;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 54px;
+    padding: 14px 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--cream);
+    flex-shrink: 0;
+  }
+  .status-time {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .signal-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+  }
+  .signal-bars span {
+    background: var(--ink);
+    border-radius: 1px;
+    width: 3px;
+  }
+  .signal-bars span:nth-child(1) { height: 4px; }
+  .signal-bars span:nth-child(2) { height: 6px; }
+  .signal-bars span:nth-child(3) { height: 9px; }
+  .signal-bars span:nth-child(4) { height: 12px; }
+  .wifi-icon {
+    width: 16px;
+    height: 12px;
+    position: relative;
+  }
+  .battery {
+    width: 25px;
+    height: 12px;
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+    position: relative;
+  }
+  .battery::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 6px;
+    background: var(--ink);
+    border-radius: 0 1px 1px 0;
+  }
+  .battery-fill {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    bottom: 2px;
+    width: 75%;
+    background: var(--ink);
+    border-radius: 1px;
+  }
+
+  /* Nav header */
+  .nav-header {
+    padding: 8px 20px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    background: var(--cream);
+  }
+  .nav-back {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--ink-12);
+  }
+  .nav-back svg { color: var(--ink); }
+  .nav-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.025em;
+  }
+  .nav-filter {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--fairway);
+  }
+
+  /* Filter chips */
+  .filter-row {
+    padding: 0 20px 14px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    flex-shrink: 0;
+  }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .chip-active {
+    background: var(--fairway);
+    color: var(--cream);
+  }
+  .chip-inactive {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--ink-12);
+  }
+
+  /* Results count */
+  .results-count {
+    padding: 0 20px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-55);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  /* Scroll area */
+  .scroll-area {
+    flex: 1;
+    overflow: hidden;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Player card */
+  .player-card {
+    background: var(--surface);
+    border-radius: 18px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 6px 20px -10px rgba(26,31,28,0.12);
+    flex-shrink: 0;
+  }
+  .player-card.featured {
+    background: var(--fairway);
+    color: var(--cream);
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+  .avatar-cream { background: var(--cream-deep); color: var(--fairway); }
+  .avatar-green { background: rgba(255,255,255,0.2); color: var(--cream); }
+  .avatar-moss  { background: #E8EEE4; color: var(--moss); }
+
+  .player-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .player-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+  }
+  .player-meta {
+    font-size: 12px;
+    color: var(--ink-55);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .player-meta.light { color: rgba(244,238,224,0.65); }
+  .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-40); }
+  .dot-light { background: rgba(244,238,224,0.4); }
+  .tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .tag-ink { background: rgba(26,31,28,0.08); color: var(--ink); }
+  .tag-green { background: rgba(63,117,96,0.15); color: var(--fairway); }
+  .tag-cream { background: rgba(255,255,255,0.15); color: var(--cream); }
+  .tag-sunset { background: rgba(198,107,74,0.12); color: var(--sunset); }
+
+  .player-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .hcp-badge {
+    background: var(--cream-deep);
+    color: var(--fairway);
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+  }
+  .hcp-badge small {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-55);
+    margin-top: 1px;
+  }
+  .hcp-badge-light {
+    background: rgba(255,255,255,0.15);
+    color: var(--cream);
+  }
+  .hcp-badge-light small { color: rgba(244,238,224,0.6); }
+
+  .connect-btn {
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+  }
+  .connect-btn-green { background: var(--fairway); color: var(--cream); }
+  .connect-btn-cream { background: var(--cream); color: var(--fairway); }
+  .connect-btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink-12);
+  }
+
+  /* Stars */
+  .stars {
+    display: flex;
+    gap: 1px;
+  }
+  .star { color: var(--sunset); font-size: 10px; }
+  .star-empty { color: var(--ink-12); font-size: 10px; }
+
+  /* Divider line */
+  .section-label {
+    padding: 6px 0 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+    flex-shrink: 0;
+  }
+
+  /* Tab bar */
+  .tab-bar {
+    height: 82px;
+    background: var(--surface);
+    border-top: 1px solid var(--ink-12);
+    display: flex;
+    align-items: flex-start;
+    padding-top: 10px;
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .tab-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tab-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink-40);
+  }
+  .tab-label.active { color: var(--fairway); }
+  .tab-icon-active { color: var(--fairway); }
+  .tab-icon-inactive { color: var(--ink-40); }
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- Status bar -->
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <div class="signal-bars">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <path d="M8 2.4C10.4 2.4 12.56 3.36 14.16 4.96L15.52 3.6C13.52 1.6 10.88 0.4 8 0.4C5.12 0.4 2.48 1.6 0.48 3.6L1.84 4.96C3.44 3.36 5.6 2.4 8 2.4Z" fill="#1A1F1C"/>
+        <path d="M8 5.6C9.76 5.6 11.36 6.32 12.56 7.52L13.92 6.16C12.32 4.56 10.24 3.6 8 3.6C5.76 3.6 3.68 4.56 2.08 6.16L3.44 7.52C4.64 6.32 6.24 5.6 8 5.6Z" fill="#1A1F1C"/>
+        <circle cx="8" cy="10.4" r="1.6" fill="#1A1F1C"/>
+      </svg>
+      <div class="battery">
+        <div class="battery-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nav header -->
+  <div class="nav-header">
+    <div class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 13L5 8L10 3" stroke="#1A1F1C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <span class="nav-title">Find Players</span>
+    <div class="nav-filter">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 4h12M4 8h8M6 12h4" stroke="#F4EEE0" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Filter chips -->
+  <div class="filter-row">
+    <div class="chip chip-active">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="3" stroke="#F4EEE0" stroke-width="1.2"/><path d="M5 2V5L7 7" stroke="#F4EEE0" stroke-width="1.2" stroke-linecap="round"/></svg>
+      10 miles
+    </div>
+    <div class="chip chip-active">Casual</div>
+    <div class="chip chip-inactive">Any handicap</div>
+    <div class="chip chip-inactive">Weekend</div>
+    <div class="chip chip-inactive">18 holes</div>
+  </div>
+
+  <!-- Results count -->
+  <div class="results-count">24 players nearby</div>
+
+  <!-- Scroll area -->
+  <div class="scroll-area">
+
+    <!-- Featured card -->
+    <div class="player-card featured">
+      <div class="avatar avatar-green">JT</div>
+      <div class="player-info">
+        <div class="player-name" style="color:var(--cream)">James T.</div>
+        <div class="player-meta light">
+          <span>34</span>
+          <span class="dot dot-light"></span>
+          <span>3.2 miles</span>
+          <span class="dot dot-light"></span>
+          <span>Surrey</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-cream">Casual</span>
+          <span class="tag tag-cream">Weekends</span>
+        </div>
+      </div>
+      <div class="player-right">
+        <div class="hcp-badge hcp-badge-light">
+          14
+          <small>HCP</small>
+        </div>
+        <button class="connect-btn connect-btn-cream">Connect</button>
+      </div>
+    </div>
+
+    <!-- Regular card -->
+    <div class="player-card">
+      <div class="avatar avatar-cream">SK</div>
+      <div class="player-info">
+        <div class="player-name">Sarah K.</div>
+        <div class="player-meta">
+          <span>28</span>
+          <span class="dot"></span>
+          <span>1.8 miles</span>
+          <span class="dot"></span>
+          <span>London</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-green">Competitive</span>
+          <span class="tag tag-ink">18 holes</span>
+        </div>
+      </div>
+      <div class="player-right">
+        <div class="hcp-badge">
+          7
+          <small>HCP</small>
+        </div>
+        <button class="connect-btn connect-btn-green">Connect</button>
+      </div>
+    </div>
+
+    <!-- Card with stars -->
+    <div class="player-card">
+      <div class="avatar avatar-moss">TB</div>
+      <div class="player-info">
+        <div class="player-name">Tom B.</div>
+        <div class="player-meta">
+          <span>41</span>
+          <span class="dot"></span>
+          <span>4.5 miles</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-ink">Casual</span>
+          <span class="tag tag-sunset">Looking for 4th</span>
+        </div>
+      </div>
+      <div class="player-right">
+        <div class="hcp-badge">
+          22
+          <small>HCP</small>
+        </div>
+        <button class="connect-btn connect-btn-outline">Connect</button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="player-card">
+      <div class="avatar avatar-cream" style="background:#F0EBD8; color:var(--sunset)">MH</div>
+      <div class="player-info">
+        <div class="player-name">Maya H.</div>
+        <div class="player-meta">
+          <span>25</span>
+          <span class="dot"></span>
+          <span>6.1 miles</span>
+          <span class="dot"></span>
+          <span>Hertford</span>
+        </div>
+        <div class="tags">
+          <span class="tag tag-green">Casual</span>
+          <span class="tag tag-ink">9 holes</span>
+        </div>
+      </div>
+      <div class="player-right">
+        <div class="hcp-badge">
+          28
+          <small>HCP</small>
+        </div>
+        <button class="connect-btn connect-btn-green">Connect</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M3 11L11 3L19 11V19H14V14H8V19H3V11Z" stroke="#B0B8B3" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="tab-label">Home</span>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="10" cy="10" r="6.5" stroke="#2F5D4A" stroke-width="1.6"/>
+          <path d="M15 15L19 19" stroke="#2F5D4A" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="tab-label active">Find</span>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect x="3" y="5" width="16" height="14" rx="2" stroke="#B0B8B3" stroke-width="1.4"/>
+          <path d="M7 3V7M15 3V7M3 10H19" stroke="#B0B8B3" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="tab-label">Tee Times</span>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M4 4H18C18.55 4 19 4.45 19 5V14C19 14.55 18.55 15 18 15H7L3 19V5C3 4.45 3.45 4 4 4Z" stroke="#B0B8B3" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="tab-label">Messages</span>
+    </div>
+    <div class="tab-item">
+      <div class="tab-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="11" cy="8" r="3.5" stroke="#B0B8B3" stroke-width="1.4"/>
+          <path d="M4 18C4 15.24 7.13 13 11 13C14.87 13 18 15.24 18 18" stroke="#B0B8B3" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="tab-label">Profile</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

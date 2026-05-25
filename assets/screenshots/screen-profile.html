@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=390">
+<title>Grip – Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --fairway:    #2F5D4A;
+    --fairway-1:  #3D7560;
+    --cream:      #F4EEE0;
+    --cream-deep: #EAE1CB;
+    --ink:        #1A1F1C;
+    --ink-55:     rgba(26,31,28,0.55);
+    --ink-40:     rgba(26,31,28,0.40);
+    --ink-12:     rgba(26,31,28,0.12);
+    --sunset:     #C66B4A;
+    --moss:       #7A8B6A;
+    --surface:    #FFFFFF;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans:    'DM Sans', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+  }
+  html, body { width:390px; height:844px; overflow:hidden; background:var(--cream); font-family:var(--font-sans); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .screen { width:390px; height:844px; display:flex; flex-direction:column; background:var(--cream); }
+
+  .status-bar { height:54px; padding:14px 24px 0; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+  .status-time { font-weight:600; font-size:15px; letter-spacing:-0.02em; }
+  .status-icons { display:flex; align-items:center; gap:6px; }
+  .signal-bars { display:flex; align-items:flex-end; gap:2px; height:12px; }
+  .signal-bars span { background:var(--ink); border-radius:1px; width:3px; }
+  .signal-bars span:nth-child(1) { height:4px; }
+  .signal-bars span:nth-child(2) { height:6px; }
+  .signal-bars span:nth-child(3) { height:9px; }
+  .signal-bars span:nth-child(4) { height:12px; }
+  .battery { width:25px; height:12px; border:1.5px solid var(--ink); border-radius:3px; position:relative; }
+  .battery::after { content:''; position:absolute; right:-4px; top:50%; transform:translateY(-50%); width:2px; height:6px; background:var(--ink); border-radius:0 1px 1px 0; }
+  .battery-fill { position:absolute; left:2px; top:2px; bottom:2px; width:75%; background:var(--ink); border-radius:1px; }
+
+  /* Profile hero */
+  .profile-hero {
+    background: var(--fairway);
+    padding: 14px 20px 20px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  /* Topo lines */
+  .profile-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 14px,
+      rgba(255,255,255,0.04) 14px,
+      rgba(255,255,255,0.04) 15px
+    );
+    pointer-events: none;
+  }
+
+  .hero-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: -0.02em;
+  }
+  .settings-btn {
+    width: 34px;
+    height: 34px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .profile-avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream);
+    flex-shrink: 0;
+  }
+
+  .profile-info { flex:1; }
+  .profile-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: -0.025em;
+    margin-bottom: 3px;
+  }
+  .profile-location {
+    font-size: 12px;
+    color: rgba(244,238,224,0.65);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .profile-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .ptag {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ptag-light { background: rgba(255,255,255,0.15); color: var(--cream); }
+  .ptag-sunset { background: rgba(198,107,74,0.25); color: #F0A080; }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    background: var(--surface);
+    margin: 0;
+    flex-shrink: 0;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  .stat-item {
+    flex: 1;
+    padding: 14px 0 12px;
+    text-align: center;
+    border-right: 1px solid var(--ink-12);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .stat-value.green { color: var(--fairway); }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+  }
+
+  /* Scroll body */
+  .scroll-body {
+    flex: 1;
+    overflow: hidden;
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-40);
+    margin-bottom: -4px;
+    flex-shrink: 0;
+  }
+
+  /* Info cards */
+  .info-card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    flex-shrink: 0;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--ink-12);
+  }
+  .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-row:first-child { padding-top: 0; }
+  .info-key { font-size: 13px; color: var(--ink-55); }
+  .info-val { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .info-val.green { color: var(--fairway); }
+
+  /* Recent rounds */
+  .rounds-card {
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    flex-shrink: 0;
+  }
+  .round-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--ink-12);
+    gap: 12px;
+  }
+  .round-row:last-child { border-bottom: none; }
+  .round-date-block {
+    width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .round-day { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-40); }
+  .round-num { font-family: var(--font-display); font-size: 18px; font-weight: 400; letter-spacing: -0.02em; color: var(--ink); line-height: 1; }
+  .round-info { flex: 1; min-width: 0; }
+  .round-course { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .round-type { font-size: 11px; color: var(--ink-40); margin-top: 1px; }
+  .round-score {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .score-p { background: rgba(198,107,74,0.1); color: var(--sunset); }
+  .score-m { background: rgba(47,93,74,0.1); color: var(--fairway); }
+  .score-e { background: var(--ink-12); color: var(--ink-55); }
+
+  /* Tab bar */
+  .tab-bar { height:82px; background:var(--surface); border-top:1px solid var(--ink-12); display:flex; align-items:flex-start; padding-top:10px; flex-shrink:0; }
+  .tab-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .tab-label { font-size:10px; font-weight:500; color:var(--ink-40); }
+  .tab-label.active { color:var(--fairway); }
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <div class="signal-bars"><span></span><span></span><span></span><span></span></div>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <path d="M8 2.4C10.4 2.4 12.56 3.36 14.16 4.96L15.52 3.6C13.52 1.6 10.88 0.4 8 0.4C5.12 0.4 2.48 1.6 0.48 3.6L1.84 4.96C3.44 3.36 5.6 2.4 8 2.4Z" fill="white"/>
+        <path d="M8 5.6C9.76 5.6 11.36 6.32 12.56 7.52L13.92 6.16C12.32 4.56 10.24 3.6 8 3.6C5.76 3.6 3.68 4.56 2.08 6.16L3.44 7.52C4.64 6.32 6.24 5.6 8 5.6Z" fill="white"/>
+        <circle cx="8" cy="10.4" r="1.6" fill="white"/>
+      </svg>
+      <div class="battery" style="border-color:white">
+        <div class="battery-fill" style="background:white"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile hero -->
+  <div class="profile-hero">
+    <div class="hero-top">
+      <span class="hero-title">My Profile</span>
+      <div class="settings-btn">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="2" stroke="white" stroke-width="1.3"/>
+          <path d="M8 1V3M8 13V15M1 8H3M13 8H15M2.93 2.93L4.34 4.34M11.66 11.66L13.07 13.07M2.93 13.07L4.34 11.66M11.66 4.34L13.07 2.93" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+    <div class="profile-row">
+      <div class="profile-avatar">AJ</div>
+      <div class="profile-info">
+        <div class="profile-name">Alex Johnson</div>
+        <div class="profile-location">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.34 1 2 2.34 2 4C2 6.5 5 9 5 9C5 9 8 6.5 8 4C8 2.34 6.66 1 5 1ZM5 5C4.45 5 4 4.55 4 4C4 3.45 4.45 3 5 3C5.55 3 6 3.45 6 4C6 4.55 5.55 5 5 5Z" fill="rgba(244,238,224,0.65)"/></svg>
+          London, UK
+        </div>
+        <div class="profile-tags">
+          <span class="ptag ptag-light">Casual</span>
+          <span class="ptag ptag-light">Weekends</span>
+          <span class="ptag ptag-sunset">Travelling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats row -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-value">47</div>
+      <div class="stat-label">Rounds</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value green">14</div>
+      <div class="stat-label">HCP</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">23</div>
+      <div class="stat-label">Partners</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">4.7</div>
+      <div class="stat-label">Rating</div>
+    </div>
+  </div>
+
+  <!-- Scroll body -->
+  <div class="scroll-body">
+
+    <div class="section-label">Playing Preferences</div>
+    <div class="info-card">
+      <div class="info-row">
+        <span class="info-key">Play style</span>
+        <span class="info-val">Casual · 18 holes</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Preferred time</span>
+        <span class="info-val green">Morning</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Home course</span>
+        <span class="info-val">Hadley Wood GC</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Budget</span>
+        <span class="info-val">£30–£60 / round</span>
+      </div>
+    </div>
+
+    <div class="section-label">Recent Rounds</div>
+    <div class="rounds-card">
+      <div class="round-row">
+        <div class="round-date-block">
+          <div class="round-day">Apr</div>
+          <div class="round-num">16</div>
+        </div>
+        <div class="round-info">
+          <div class="round-course">Hadley Wood GC</div>
+          <div class="round-type">18 holes · Casual · with James T.</div>
+        </div>
+        <div class="round-score score-p">+6</div>
+      </div>
+      <div class="round-row">
+        <div class="round-date-block">
+          <div class="round-day">Apr</div>
+          <div class="round-num">9</div>
+        </div>
+        <div class="round-info">
+          <div class="round-course">Sunningdale GC</div>
+          <div class="round-type">18 holes · Casual</div>
+        </div>
+        <div class="round-score score-e">E</div>
+      </div>
+      <div class="round-row">
+        <div class="round-date-block">
+          <div class="round-day">Mar</div>
+          <div class="round-num">31</div>
+        </div>
+        <div class="round-info">
+          <div class="round-course">Wentworth Club</div>
+          <div class="round-type">18 holes · Competitive</div>
+        </div>
+        <div class="round-score score-m">-2</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <div class="tab-item">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11L11 3L19 11V19H14V14H8V19H3V11Z" stroke="#B0B8B3" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <span class="tab-label">Home</span>
+    </div>
+    <div class="tab-item">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="10" cy="10" r="6.5" stroke="#B0B8B3" stroke-width="1.4"/><path d="M15 15L19 19" stroke="#B0B8B3" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span class="tab-label">Find</span>
+    </div>
+    <div class="tab-item">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="16" height="14" rx="2" stroke="#B0B8B3" stroke-width="1.4"/><path d="M7 3V7M15 3V7M3 10H19" stroke="#B0B8B3" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span class="tab-label">Tee Times</span>
+    </div>
+    <div class="tab-item">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 4H18C18.55 4 19 4.45 19 5V14C19 14.55 18.55 15 18 15H7L3 19V5C3 4.45 3.45 4 4 4Z" stroke="#B0B8B3" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <span class="tab-label">Messages</span>
+    </div>
+    <div class="tab-item">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3.5" stroke="#2F5D4A" stroke-width="1.6"/><path d="M4 18C4 15.24 7.13 13 11 13C14.87 13 18 15.24 18 18" stroke="#2F5D4A" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span class="tab-label active">Profile</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

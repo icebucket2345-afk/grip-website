@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grip – App Screenshots Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,300&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  :root {
+    --fairway: #2F5D4A;
+    --cream:   #F4EEE0;
+    --ink:     #1A1F1C;
+    --sunset:  #C66B4A;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-sans:    'DM Sans', system-ui, sans-serif;
+  }
+  body {
+    background: var(--cream);
+    font-family: var(--font-sans);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 60px 40px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page-header { text-align:center; margin-bottom: 56px; }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--fairway);
+    margin-bottom: 16px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .page-title em { font-style:italic; font-weight:300; color: var(--fairway); }
+  .page-sub { font-size:16px; color: rgba(26,31,28,0.55); }
+
+  .screens-grid {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  .screen-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* iPhone 14 shell */
+  .phone-shell {
+    width: 390px;
+    background: #1A1F1C;
+    border-radius: 54px;
+    padding: 14px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.08),
+      0 40px 80px -20px rgba(26,31,28,0.5),
+      0 80px 120px -40px rgba(26,31,28,0.3);
+    position: relative;
+  }
+
+  /* Dynamic island */
+  .dynamic-island {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 37px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 10;
+  }
+
+  .phone-screen {
+    width: 100%;
+    border-radius: 44px;
+    overflow: hidden;
+    background: #F4EEE0;
+    position: relative;
+  }
+
+  .phone-screen iframe {
+    width: 390px;
+    height: 844px;
+    border: none;
+    display: block;
+  }
+
+  /* Side buttons */
+  .phone-shell::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 110px;
+    width: 3px;
+    height: 36px;
+    background: #2A2F2C;
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 50px 0 #2A2F2C, 0 100px 0 #2A2F2C;
+  }
+  .phone-shell::after {
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: 140px;
+    width: 3px;
+    height: 60px;
+    background: #2A2F2C;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .screen-label {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .screen-desc {
+    font-size: 12px;
+    color: rgba(26,31,28,0.45);
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    font-size: 12px;
+    color: rgba(26,31,28,0.35);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="logo">grip</div>
+  <div class="page-title">App <em>screenshots</em></div>
+  <div class="page-sub">390 × 844px · iPhone 14 · Grip design system</div>
+</div>
+
+<div class="screens-grid">
+
+  <div class="screen-wrap">
+    <div class="phone-shell">
+      <div class="dynamic-island"></div>
+      <div class="phone-screen">
+        <iframe src="screen-activity-feed.html" scrolling="no" title="Activity Feed"></iframe>
+      </div>
+    </div>
+    <div>
+      <div class="screen-label">Activity Feed</div>
+      <div class="screen-desc">Home · Social activity · Connections</div>
+    </div>
+  </div>
+
+  <div class="screen-wrap">
+    <div class="phone-shell">
+      <div class="dynamic-island"></div>
+      <div class="phone-screen">
+        <iframe src="screen-find-players.html" scrolling="no" title="Find Players"></iframe>
+      </div>
+    </div>
+    <div>
+      <div class="screen-label">Find Players</div>
+      <div class="screen-desc">Search · Filters · Connect</div>
+    </div>
+  </div>
+
+  <div class="screen-wrap">
+    <div class="phone-shell">
+      <div class="dynamic-island"></div>
+      <div class="phone-screen">
+        <iframe src="screen-tee-times.html" scrolling="no" title="Tee Times"></iframe>
+      </div>
+    </div>
+    <div>
+      <div class="screen-label">Tee Times</div>
+      <div class="screen-desc">Book · Courses · Availability</div>
+    </div>
+  </div>
+
+  <div class="screen-wrap">
+    <div class="phone-shell">
+      <div class="dynamic-island"></div>
+      <div class="phone-screen">
+        <iframe src="screen-profile.html" scrolling="no" title="Profile"></iframe>
+      </div>
+    </div>
+    <div>
+      <div class="screen-label">My Profile</div>
+      <div class="screen-desc">Stats · Rounds · Preferences</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Grip · Brand Identity 2026 · For use on grip-website</footer>
+
+</body>
+</html>
