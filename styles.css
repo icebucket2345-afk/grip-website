@@ -46,6 +46,8 @@ img, svg { display: block; max-width: 100%; }
 .menu-btn { display: none; background: none; border: none; padding: 10px; cursor: pointer; color: var(--grip-cream); }
 .mobile-menu { display: none; border-top: 1px solid rgba(244,238,224,0.08); padding: 20px 32px; flex-direction: column; gap: 14px; background: var(--grip-ink); }
 .mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 15px; color: rgba(244,238,224,0.75); transition: color 200ms var(--grip-ease); }
+.mobile-menu a:hover { color: var(--grip-cream); }
 
 /* ============ HERO ============ */
 .hero { padding: 160px 0 96px; position: relative; overflow: hidden; }
