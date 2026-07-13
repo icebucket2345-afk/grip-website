@@ -104,42 +104,13 @@ img, svg { display: block; max-width: 100%; }
 .waitlist-msg.show { display: block; }
 .free-tag { margin-top: 20px; font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); }
 
-/* Hero mockup — a real-feeling "match card" */
-.mockup-wrap { display: flex; justify-content: center; }
-.mockup {
-  width: 100%; max-width: 380px;
-  background: #fff; border-radius: 28px;
-  box-shadow: var(--grip-shadow-3);
-  padding: 32px;
-  transform: rotate(-1.5deg);
-}
-.mockup-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; font-family: var(--grip-font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); }
-.mockup-top .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--grip-sunset); display: inline-block; margin-right: 6px; vertical-align: middle; }
-.mockup-title {
-  font-family: var(--grip-font-display); font-weight: 400;
-  font-size: 28px; line-height: 1.15; letter-spacing: -0.025em;
-  margin-bottom: 24px;
-}
-.mockup-title em { font-style: italic; font-weight: 300; color: var(--grip-fairway); }
-.mockup-row {
-  display: flex; align-items: center; gap: 14px;
-  padding: 14px 0; border-top: 1px solid var(--grip-rule);
-}
-.mockup-row:last-of-type { border-bottom: 1px solid var(--grip-rule); }
-.mockup-ava {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--grip-cream-deep); color: var(--grip-fairway);
-  font-family: var(--grip-font-display); font-size: 16px; font-weight: 500;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.mockup-who { font-weight: 500; font-size: 14px; }
-.mockup-meta { font-family: var(--grip-font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grip-ink-55); margin-top: 2px; }
-.mockup-cta {
-  margin-top: 22px;
-  background: var(--grip-fairway); color: var(--grip-cream);
-  padding: 14px; border-radius: 999px; text-align: center;
-  font-weight: 500; font-size: 14px;
-}
+/* Hero app preview — fanned phone screens */
+.hero-phones { position: relative; display: flex; justify-content: center; align-items: center; min-height: 480px; }
+.hero-phone { position: absolute; background: var(--grip-ink); padding: 7px; border-radius: 34px; box-shadow: var(--grip-shadow-3); }
+.hero-phone img { display: block; width: 100%; border-radius: 27px; }
+.hero-phone.mid { width: 214px; z-index: 3; }
+.hero-phone.left { width: 188px; z-index: 1; transform: translate(-118px, 26px) rotate(-9deg); }
+.hero-phone.right { width: 188px; z-index: 1; transform: translate(118px, 26px) rotate(9deg); }
 
 /* ============ SECTION HEADER ============ */
 .section { padding: 120px 0; }
@@ -326,7 +297,10 @@ img, svg { display: block; max-width: 100%; }
   .menu-btn { display: block; }
   .hero { padding: 120px 0 72px; }
   .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-  .mockup { transform: rotate(0); max-width: 340px; margin: 0 auto; }
+  .hero-phones { min-height: 440px; }
+  .hero-phone.mid { width: 190px; }
+  .hero-phone.left { width: 166px; transform: translate(-104px, 22px) rotate(-9deg); }
+  .hero-phone.right { width: 166px; transform: translate(104px, 22px) rotate(9deg); }
   .section { padding: 80px 0; }
   .steps, .feats { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; gap: 32px; }
