@@ -104,13 +104,19 @@ img, svg { display: block; max-width: 100%; }
 .waitlist-msg.show { display: block; }
 .free-tag { margin-top: 20px; font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); }
 
-/* Hero app preview — fanned phone screens */
-.hero-phones { position: relative; display: flex; justify-content: center; align-items: center; min-height: 480px; }
-.hero-phone { position: absolute; background: var(--grip-ink); padding: 7px; border-radius: 34px; box-shadow: var(--grip-shadow-3); }
+/* Hero app preview — overlapping fanned phone screens */
+.hero-phones { position: relative; height: 500px; }
+.hero-phone {
+  position: absolute; top: 50%; left: 50%;
+  background: var(--grip-ink); padding: 7px; border-radius: 34px;
+  box-shadow: var(--grip-shadow-3);
+  transform-origin: center bottom;
+}
 .hero-phone img { display: block; width: 100%; border-radius: 27px; }
-.hero-phone.mid { width: 214px; z-index: 3; }
-.hero-phone.left { width: 188px; z-index: 1; transform: translate(-118px, 26px) rotate(-9deg); }
-.hero-phone.right { width: 188px; z-index: 1; transform: translate(118px, 26px) rotate(9deg); }
+/* percentages are relative to each phone's own width, so the fan holds at any size */
+.hero-phone.mid   { width: 216px; z-index: 3; transform: translate(-50%, -52%); }
+.hero-phone.left  { width: 190px; z-index: 1; transform: translate(-92%, -44%) rotate(-10deg); }
+.hero-phone.right { width: 190px; z-index: 1; transform: translate(-8%, -44%) rotate(10deg); }
 
 /* ============ SECTION HEADER ============ */
 .section { padding: 120px 0; }
@@ -297,10 +303,10 @@ img, svg { display: block; max-width: 100%; }
   .menu-btn { display: block; }
   .hero { padding: 120px 0 72px; }
   .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-  .hero-phones { min-height: 440px; }
-  .hero-phone.mid { width: 190px; }
-  .hero-phone.left { width: 166px; transform: translate(-104px, 22px) rotate(-9deg); }
-  .hero-phone.right { width: 166px; transform: translate(104px, 22px) rotate(9deg); }
+  .hero-phones { height: 440px; }
+  .hero-phone.mid { width: 194px; }
+  .hero-phone.left { width: 170px; transform: translate(-92%, -44%) rotate(-10deg); }
+  .hero-phone.right { width: 170px; transform: translate(-8%, -44%) rotate(10deg); }
   .section { padding: 80px 0; }
   .steps, .feats { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr; gap: 32px; }
