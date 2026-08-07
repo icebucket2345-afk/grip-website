@@ -82,12 +82,13 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .waitlist-label { font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); margin-bottom: 12px; }
-/* email spans the full width; region + button share the row beneath it */
+/* email and region span the full width; travel + time + button share row 3 */
 .waitlist-form {
-  display: grid; grid-template-columns: 1fr auto;
-  gap: 10px; max-width: 480px;
+  display: grid; grid-template-columns: 1fr 1fr auto;
+  gap: 10px; max-width: 560px;
 }
-.waitlist-form input { grid-column: 1 / -1; }
+.waitlist-form input,
+.waitlist-form select[name="region"] { grid-column: 1 / -1; }
 .waitlist-form input,
 .waitlist-form select {
   min-width: 0;
@@ -102,7 +103,15 @@ img, svg { display: block; max-width: 100%; }
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23111' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 20px center; background-size: 12px 8px;
 }
-.waitlist-form select:invalid { color: var(--grip-ink-55); }
+/* the optional selects are never :invalid, so match on the placeholder itself */
+.waitlist-form select:has(option[value=""]:checked) { color: var(--grip-ink-55); }
+/* narrower fields on the last row: tighter gutters so labels don't clip */
+.waitlist-form select[name="travel_radius"],
+.waitlist-form select[name="play_time"] {
+  padding-left: 18px; padding-right: 38px;
+  background-position: right 16px center;
+  text-overflow: ellipsis;
+}
 .waitlist-form input:focus,
 .waitlist-form select:focus { outline: none; border-color: var(--grip-fairway); }
 .waitlist-form button {
@@ -330,7 +339,10 @@ img, svg { display: block; max-width: 100%; }
   .container { padding: 0 20px; }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 560px) {
+  .waitlist-form { grid-template-columns: 1fr 1fr; }
+  .waitlist-form button { grid-column: 1 / -1; width: 100%; }
+}
+@media (max-width: 400px) {
   .waitlist-form { grid-template-columns: 1fr; }
-  .waitlist-form button { width: 100%; }
 }

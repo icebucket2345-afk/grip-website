@@ -6,7 +6,7 @@
   <title>Grip — Find Your Perfect Golf Partner</title>
   <meta name="description" content="Grip connects golfers who actually want to play — same course, same day, same pace. Launching in the UK App Store." />
   <link rel="icon" type="image/svg+xml" href="brand/logo/grip-favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
 </head>
 <body>
 
@@ -63,6 +63,20 @@
               <option value="northern_ireland">Northern Ireland</option>
               <option value="ireland">Ireland</option>
               <option value="other">Elsewhere</option>
+            </select>
+            <select name="travel_radius" aria-label="How far would you travel?">
+              <option value="" disabled selected>How far?</option>
+              <option value="10">Up to 10 miles</option>
+              <option value="25">Up to 25 miles</option>
+              <option value="50">50+ miles</option>
+            </select>
+            <select name="play_time" aria-label="When do you usually play?">
+              <option value="" disabled selected>When?</option>
+              <option value="weekday_mornings">Weekday mornings</option>
+              <option value="weekday_daytime">Weekday daytime</option>
+              <option value="weekday_evenings">Weekday evenings</option>
+              <option value="weekends">Weekends</option>
+              <option value="flexible">Flexible</option>
             </select>
             <button type="submit" disabled>Notify me</button>
           </form>
@@ -280,6 +294,6 @@
     </div>
   </footer>
 
-  <script src="main.js?v=2"></script>
+  <script src="main.js?v=3"></script>
 </body>
 </html>
