@@ -114,10 +114,8 @@ img, svg { display: block; max-width: 100%; }
 }
 .waitlist-form button:hover:not(:disabled) { background: var(--grip-fairway-2); }
 .waitlist-form button:active:not(:disabled) { transform: scale(0.97); }
-.waitlist-form button:disabled {
-  background: transparent; color: var(--grip-ink-55);
-  border-color: var(--grip-ink-12); cursor: not-allowed;
-}
+/* stays recognisably the brand CTA, just clearly not ready yet */
+.waitlist-form button:disabled { opacity: 0.4; cursor: not-allowed; }
 .waitlist-msg { margin-top: 14px; font-size: 14px; color: var(--grip-fairway); display: none; }
 .waitlist-msg.show { display: block; }
 .free-tag { margin-top: 20px; font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); }
