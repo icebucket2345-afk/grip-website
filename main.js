@@ -17,15 +17,24 @@
   const form = document.getElementById('waitlist-form');
   const msg = document.getElementById('waitlist-msg');
   if (form) {
+    const emailInput = form.querySelector('input[name="email"]');
+    const regionSelect = form.querySelector('select[name="region"]');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const fail = (text) => {
+      msg.textContent = text;
+      msg.style.color = 'var(--grip-sunset)';
+      msg.classList.add('show');
+    };
+
+    // Submit stays locked until an area is picked; markup ships it disabled.
+    const syncSubmit = () => { submitBtn.disabled = !regionSelect.value; };
+    regionSelect.addEventListener('change', syncSubmit);
+    syncSubmit();
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input[name="email"]').value.trim().toLowerCase();
-      const region = form.querySelector('select[name="region"]').value;
-      const fail = (text) => {
-        msg.textContent = text;
-        msg.style.color = 'var(--grip-sunset)';
-        msg.classList.add('show');
-      };
+      const email = emailInput.value.trim().toLowerCase();
+      const region = regionSelect.value;
 
       if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
         fail("Please enter a valid email.");
@@ -36,7 +45,6 @@
         return;
       }
 
-      const submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
 
       try {
@@ -65,7 +73,7 @@
       }
 
       msg.classList.add('show');
-      submitBtn.disabled = false;
+      syncSubmit();
     });
   }
 

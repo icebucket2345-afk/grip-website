@@ -82,10 +82,15 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .waitlist-label { font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); margin-bottom: 12px; }
-.waitlist-form { display: flex; gap: 10px; max-width: 480px; flex-wrap: wrap; }
+/* email spans the full width; region + button share the row beneath it */
+.waitlist-form {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 10px; max-width: 480px;
+}
+.waitlist-form input { grid-column: 1 / -1; }
 .waitlist-form input,
 .waitlist-form select {
-  flex: 1 1 240px;
+  min-width: 0;
   background: #fff; border: 1px solid var(--grip-ink-12);
   border-radius: 999px; padding: 14px 22px;
   font-family: var(--grip-font-sans); font-size: 15px; color: var(--grip-ink);
@@ -101,14 +106,18 @@ img, svg { display: block; max-width: 100%; }
 .waitlist-form input:focus,
 .waitlist-form select:focus { outline: none; border-color: var(--grip-fairway); }
 .waitlist-form button {
-  padding: 14px 26px; border-radius: 999px;
+  padding: 14px 28px; border-radius: 999px; white-space: nowrap;
   background: var(--grip-fairway); color: var(--grip-cream);
-  font-family: var(--grip-font-sans); font-weight: 500; font-size: 14px;
-  border: none; cursor: pointer;
-  transition: background 200ms var(--grip-ease), transform 150ms var(--grip-ease);
+  font-family: var(--grip-font-sans); font-weight: 500; font-size: 15px;
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 200ms var(--grip-ease), transform 150ms var(--grip-ease), opacity 200ms var(--grip-ease);
 }
-.waitlist-form button:hover { background: var(--grip-fairway-2); }
-.waitlist-form button:active { transform: scale(0.97); }
+.waitlist-form button:hover:not(:disabled) { background: var(--grip-fairway-2); }
+.waitlist-form button:active:not(:disabled) { transform: scale(0.97); }
+.waitlist-form button:disabled {
+  background: transparent; color: var(--grip-ink-55);
+  border-color: var(--grip-ink-12); cursor: not-allowed;
+}
 .waitlist-msg { margin-top: 14px; font-size: 14px; color: var(--grip-fairway); display: none; }
 .waitlist-msg.show { display: block; }
 .free-tag { margin-top: 20px; font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); }
@@ -321,4 +330,9 @@ img, svg { display: block; max-width: 100%; }
   .foot-grid { grid-template-columns: 1fr; gap: 32px; }
   .cta-wrap { padding: 64px 24px; margin: 0 16px; }
   .container { padding: 0 20px; }
+}
+
+@media (max-width: 460px) {
+  .waitlist-form { grid-template-columns: 1fr; }
+  .waitlist-form button { width: 100%; }
 }
