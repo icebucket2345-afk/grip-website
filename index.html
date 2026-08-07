@@ -47,6 +47,23 @@
           <div class="waitlist-label">Be first to know when we launch</div>
           <form class="waitlist-form" id="waitlist-form" novalidate>
             <input type="email" name="email" placeholder="Email" autocomplete="email" required />
+            <select name="region" aria-label="Where do you play?" required>
+              <option value="" disabled selected>Where do you play?</option>
+              <option value="london">London</option>
+              <option value="south_east">South East</option>
+              <option value="south_west">South West</option>
+              <option value="east_of_england">East of England</option>
+              <option value="east_midlands">East Midlands</option>
+              <option value="west_midlands">West Midlands</option>
+              <option value="north_west">North West</option>
+              <option value="north_east">North East</option>
+              <option value="yorkshire">Yorkshire</option>
+              <option value="scotland">Scotland</option>
+              <option value="wales">Wales</option>
+              <option value="northern_ireland">Northern Ireland</option>
+              <option value="ireland">Ireland</option>
+              <option value="other">Elsewhere</option>
+            </select>
             <button type="submit">Notify me</button>
           </form>
           <p class="waitlist-msg" id="waitlist-msg"></p>

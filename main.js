@@ -19,11 +19,20 @@
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector('input[name="email"]').value.trim();
-      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        msg.textContent = "Please enter a valid email.";
+      const email = form.querySelector('input[name="email"]').value.trim().toLowerCase();
+      const region = form.querySelector('select[name="region"]').value;
+      const fail = (text) => {
+        msg.textContent = text;
         msg.style.color = 'var(--grip-sunset)';
         msg.classList.add('show');
+      };
+
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        fail("Please enter a valid email.");
+        return;
+      }
+      if (!region) {
+        fail("Please choose where you play.");
         return;
       }
 
@@ -39,24 +48,20 @@
             'Content-Type': 'application/json',
             'Prefer': 'return=minimal'
           },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ email, region })
         });
 
-        if (res.ok) {
-          msg.textContent = "You're on the list. We'll be in touch.";
-          msg.style.color = 'var(--grip-fairway)';
-          form.reset();
-        } else if (res.status === 409) {
-          msg.textContent = "You're already on the list.";
+        if (res.ok || res.status === 409) {
+          msg.textContent = res.ok
+            ? "You're on the list. We'll be in touch."
+            : "You're already on the list.";
           msg.style.color = 'var(--grip-fairway)';
           form.reset();
         } else {
-          msg.textContent = "Something went wrong. Please try again.";
-          msg.style.color = 'var(--grip-sunset)';
+          fail("Something went wrong. Please try again.");
         }
       } catch {
-        msg.textContent = "Something went wrong. Please try again.";
-        msg.style.color = 'var(--grip-sunset)';
+        fail("Something went wrong. Please try again.");
       }
 
       msg.classList.add('show');
