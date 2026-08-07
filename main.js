@@ -20,7 +20,6 @@
     const emailInput = form.querySelector('input[name="email"]');
     const regionSelect = form.querySelector('select[name="region"]');
     const travelSelect = form.querySelector('select[name="travel_radius"]');
-    const timeSelect = form.querySelector('select[name="play_time"]');
     const submitBtn = form.querySelector('button[type="submit"]');
     const fail = (text) => {
       msg.textContent = text;
@@ -47,10 +46,9 @@
         return;
       }
 
-      // travel radius and play time are optional; omit when skipped so they store as null
+      // travel radius is optional; omit when skipped so it stores as null
       const payload = { email, region };
       if (travelSelect.value) payload.travel_radius = Number(travelSelect.value);
-      if (timeSelect.value) payload.play_time = timeSelect.value;
 
       submitBtn.disabled = true;
 

@@ -82,10 +82,10 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .waitlist-label { font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); margin-bottom: 12px; }
-/* email and region span the full width; travel + time + button share row 3 */
+/* email and region span the full width; travel + button share row 3 */
 .waitlist-form {
-  display: grid; grid-template-columns: 1fr 1fr auto;
-  gap: 10px; max-width: 560px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 10px; max-width: 480px;
 }
 .waitlist-form input,
 .waitlist-form select[name="region"] { grid-column: 1 / -1; }
@@ -105,13 +105,7 @@ img, svg { display: block; max-width: 100%; }
 }
 /* the optional selects are never :invalid, so match on the placeholder itself */
 .waitlist-form select:has(option[value=""]:checked) { color: var(--grip-ink-55); }
-/* narrower fields on the last row: tighter gutters so labels don't clip */
-.waitlist-form select[name="travel_radius"],
-.waitlist-form select[name="play_time"] {
-  padding-left: 18px; padding-right: 38px;
-  background-position: right 16px center;
-  text-overflow: ellipsis;
-}
+.waitlist-form select[name="travel_radius"] { text-overflow: ellipsis; }
 .waitlist-form input:focus,
 .waitlist-form select:focus { outline: none; border-color: var(--grip-fairway); }
 .waitlist-form button {
@@ -339,10 +333,7 @@ img, svg { display: block; max-width: 100%; }
   .container { padding: 0 20px; }
 }
 
-@media (max-width: 560px) {
-  .waitlist-form { grid-template-columns: 1fr 1fr; }
-  .waitlist-form button { grid-column: 1 / -1; width: 100%; }
-}
-@media (max-width: 400px) {
+@media (max-width: 460px) {
   .waitlist-form { grid-template-columns: 1fr; }
+  .waitlist-form button { width: 100%; }
 }
