@@ -214,11 +214,11 @@ img, svg { display: block; max-width: 100%; }
 /* ============ SCREENSHOTS ============ */
 .shots-scroll {
   display: flex; gap: 24px;
-  /* safe center: centres the row when it fits, falls back to start-aligned
-     scrolling when it overflows so no panel is cut off */
-  justify-content: safe center;
-  overflow-x: auto; padding: 0 32px 24px;
-  scroll-snap-type: x mandatory; scroll-padding: 0 32px;
+  overflow-x: auto;
+  /* gutters match .container so the panels line up with the section heading */
+  padding: 0 max(32px, calc((100% - 1200px) / 2 + 32px)) 24px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(32px, calc((100% - 1200px) / 2 + 32px));
   -webkit-overflow-scrolling: touch;
 }
 .shots-scroll::-webkit-scrollbar { height: 6px; }
@@ -320,6 +320,16 @@ img, svg { display: block; max-width: 100%; }
 .legal ul { padding-left: 20px; }
 .legal a { color: var(--grip-fairway); border-bottom: 1px solid var(--grip-rule); }
 
+/* Wide screens fit all five panels inside the container, so they sit as an even
+   row between the same margins as the heading instead of scrolling. Below this
+   the panels would be narrow enough for the screenshots to crop, so the
+   carousel keeps its fixed panel width and scrolls instead. */
+@media (min-width: 1240px) {
+  .shots-scroll { overflow-x: visible; }
+  .shot { flex: 1 1 0; max-width: 260px; padding: 24px 18px; }
+  .shot-title { font-size: 21px; }
+}
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 860px) {
   .nav-links { display: none; }
@@ -335,6 +345,8 @@ img, svg { display: block; max-width: 100%; }
   .foot-grid { grid-template-columns: 1fr; gap: 32px; }
   .cta-wrap { padding: 64px 24px; margin: 0 16px; }
   .container { padding: 0 20px; }
+  /* keep the carousel gutter matched to the narrower container padding */
+  .shots-scroll { padding-inline: 20px; scroll-padding-inline: 20px; }
 }
 
 @media (max-width: 460px) {
