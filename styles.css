@@ -244,7 +244,10 @@ img, svg { display: block; max-width: 100%; }
 .shot-tag { font-family: var(--grip-font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); margin-bottom: 12px; }
 .shot-title { font-family: var(--grip-font-display); font-weight: 400; font-size: 24px; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px; }
 .shot-title em { font-style: italic; font-weight: 300; color: var(--grip-fairway); }
-.shot-body { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+/* min-height:0 lets the body shrink to the space left in the panel, so the
+   screenshot ends inside the padding with its rounded corners intact rather
+   than overshooting and being cut square by the panel edge. */
+.shot-body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; }
 .shot-chip {
   display: flex; align-items: center; gap: 10px;
   padding: 10px 12px; background: var(--grip-cream-deep); border-radius: 12px;
