@@ -215,11 +215,17 @@ img, svg { display: block; max-width: 100%; }
 .shots-scroll {
   display: flex; gap: 24px;
   overflow-x: auto;
-  /* gutters match .container so the panels line up with the section heading */
+  /* gutters match .container so a scrolling row starts level with the heading */
   padding: 0 max(32px, calc((100% - 1200px) / 2 + 32px)) 24px;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: max(32px, calc((100% - 1200px) / 2 + 32px));
   -webkit-overflow-scrolling: touch;
+}
+/* Once the full row of panels fits the window, centre it on the page. The
+   breakpoint clears the row width plus gutters and a scrollbar; safe centring
+   keeps the first panel reachable if it does overflow after all. */
+@media (min-width: 1480px) {
+  .shots-scroll { padding-inline: 32px; scroll-padding-inline: 32px; justify-content: safe center; }
 }
 .shots-scroll::-webkit-scrollbar { height: 6px; }
 .shots-scroll::-webkit-scrollbar-thumb { background: var(--grip-ink-12); border-radius: 6px; }
@@ -319,16 +325,6 @@ img, svg { display: block; max-width: 100%; }
 .legal p, .legal li { color: var(--grip-ink-70); font-size: 15px; line-height: 1.7; margin-bottom: 14px; }
 .legal ul { padding-left: 20px; }
 .legal a { color: var(--grip-fairway); border-bottom: 1px solid var(--grip-rule); }
-
-/* Wide screens fit all five panels inside the container, so they sit as an even
-   row between the same margins as the heading instead of scrolling. Below this
-   the panels would be narrow enough for the screenshots to crop, so the
-   carousel keeps its fixed panel width and scrolls instead. */
-@media (min-width: 1240px) {
-  .shots-scroll { overflow-x: visible; }
-  .shot { flex: 1 1 0; max-width: 260px; padding: 24px 18px; }
-  .shot-title { font-size: 21px; }
-}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 860px) {
