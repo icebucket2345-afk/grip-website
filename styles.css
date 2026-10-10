@@ -81,7 +81,9 @@ img, svg { display: block; max-width: 100%; }
   max-width: 44ch; margin-bottom: 40px;
 }
 
-.waitlist-label { font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); margin-bottom: 12px; }
+.waitlist-label { font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); margin-bottom: 8px; }
+.founding-note { font-size: 15px; color: var(--grip-ink-70); margin: 0 0 14px; }
+.founding-note strong { color: var(--grip-fairway); }
 /* email and region span the full width; travel + button share row 3 */
 .waitlist-form {
   display: grid; grid-template-columns: 1fr auto;

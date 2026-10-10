@@ -66,8 +66,8 @@
 
         if (res.ok || res.status === 409) {
           msg.textContent = res.ok
-            ? "You're on the list. We'll be in touch."
-            : "You're already on the list.";
+            ? "You're on the list. Sign up to Grip with this email when we launch to get your Founding member badge."
+            : "You're already on the list. Sign up to Grip with this email when we launch to get your Founding member badge.";
           msg.style.color = 'var(--grip-fairway)';
           form.reset();
         } else {
