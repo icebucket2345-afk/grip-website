@@ -16,6 +16,59 @@
 
   const form = document.getElementById('waitlist-form');
   const msg = document.getElementById('waitlist-msg');
+
+  // Attribution: the post link a golfer arrived on (utm_*) and the share
+  // link that sent them (ref). Kept for the session so it survives moving
+  // between pages before signing up. Storage can be blocked; signup still works.
+  const ATTR_KEY = 'grip_attribution';
+  const REF_RE = /^[0-9a-f]{10}$/;
+  const attribution = (() => {
+    const params = new URLSearchParams(location.search);
+    const found = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach((k) => {
+      const v = (params.get(k) || '').trim().slice(0, 100);
+      if (v) found[k] = v;
+    });
+    const ref = (params.get('ref') || '').toLowerCase();
+    if (REF_RE.test(ref)) found.referred_by = ref;
+    try {
+      if (Object.keys(found).length) sessionStorage.setItem(ATTR_KEY, JSON.stringify(found));
+      return JSON.parse(sessionStorage.getItem(ATTR_KEY) || '{}');
+    } catch {
+      return found;
+    }
+  })();
+
+  // A golfer's share code is derived from their email, so signing up twice
+  // gives the same link. Needs a secure context; without one there is no link.
+  const referralCode = async (email) => {
+    if (!window.crypto || !crypto.subtle) return null;
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(email));
+    return Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('').slice(0, 10);
+  };
+
+  const share = document.getElementById('waitlist-share');
+  const showShare = (code) => {
+    if (!share || !code) return;
+    const link = `https://gripgolfapp.com/?ref=${code}&utm_source=referral&utm_medium=share`;
+    const btn = share.querySelector('[data-share-btn]');
+    share.querySelector('[data-share-link]').textContent = link.replace('https://', '');
+    btn.onclick = async () => {
+      const text = 'Grip is a new app for finding golf partners, at home or away. Join the waitlist:';
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: 'Grip', text, url: link });
+          return;
+        }
+        await navigator.clipboard.writeText(link);
+        btn.textContent = 'Link copied';
+      } catch {
+        // Share sheet dismissed or clipboard blocked; the link stays on screen.
+      }
+    };
+    share.hidden = false;
+  };
+
   if (form) {
     const emailInput = form.querySelector('input[name="email"]');
     const regionSelect = form.querySelector('select[name="region"]');
@@ -53,7 +106,11 @@
       submitBtn.disabled = true;
 
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        const code = await referralCode(email).catch(() => null);
+        const tracked = { ...payload, ...attribution };
+        if (code) tracked.referral_code = code;
+
+        const insert = (body) => fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
           method: 'POST',
           headers: {
             'apikey': SUPABASE_ANON_KEY,
@@ -61,8 +118,13 @@
             'Content-Type': 'application/json',
             'Prefer': 'return=minimal'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(body)
         });
+
+        // A 400 means the attribution columns are not in the database yet
+        // (migration 118); never lose the signup over them.
+        let res = await insert(tracked);
+        if (res.status === 400) res = await insert(payload);
 
         if (res.ok || res.status === 409) {
           msg.textContent = res.ok
@@ -70,6 +132,7 @@
             : "You're already on the list. Sign up to Grip with this email when we launch to get your Founding member badge.";
           msg.style.color = 'var(--grip-fairway)';
           form.reset();
+          showShare(code);
         } else {
           fail("Something went wrong. Please try again.");
         }

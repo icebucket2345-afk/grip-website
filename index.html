@@ -5,8 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grip — Find Your Perfect Golf Partner</title>
   <meta name="description" content="Grip connects golfers who actually want to play — at home, on a trip anywhere in the world, or as a guest at a members' club. Launching in the UK App Store." />
+  <link rel="canonical" href="https://gripgolfapp.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Grip" />
+  <meta property="og:url" content="https://gripgolfapp.com/" />
+  <meta property="og:title" content="Grip — Find Your Perfect Golf Partner" />
+  <meta property="og:description" content="Meet golfers at home, on a trip anywhere in the world, or as a guest at a members' club. Free on iOS and Android." />
+  <meta property="og:image" content="https://gripgolfapp.com/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Grip app screens: Find Players, a chat and a golfer's profile" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@gripgolfapp" />
   <link rel="icon" type="image/svg+xml" href="brand/logo/grip-favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=7" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
 
@@ -44,7 +56,7 @@
           <div class="eyebrow"><span class="dot"></span>Launching soon in the UK App Store</div>
           <h1>Find your <em>perfect</em> playing partners.</h1>
           <p class="sub">Grip connects golfers who are looking to enjoy golf with like-minded people — same course, range or simulator, same day, same pace. At home, on a trip abroad, or as a member's guest.</p>
-          <div class="waitlist-label">Be first to know when we launch</div>
+          <div class="waitlist-label">Launching area by area · Join to unlock yours</div>
           <p class="founding-note">Join before launch and get a <strong>Founding member</strong> badge in the app.</p>
           <form class="waitlist-form" id="waitlist-form" novalidate>
             <input type="email" name="email" placeholder="Email" autocomplete="email" required />
@@ -74,6 +86,14 @@
             <button type="submit" disabled>Notify me</button>
           </form>
           <p class="waitlist-msg" id="waitlist-msg"></p>
+          <div class="waitlist-share" id="waitlist-share" hidden>
+            <p class="waitlist-share-title">Move your area up the list</p>
+            <p class="waitlist-share-sub">Grip launches area by area. Share your link with the golfers you play with.</p>
+            <div class="waitlist-share-row">
+              <span class="waitlist-share-link" data-share-link></span>
+              <button type="button" class="waitlist-share-btn" data-share-btn>Share link</button>
+            </div>
+          </div>
           <div class="free-tag">Free to download · iOS &amp; Android</div>
         </div>
         <div class="hero-phones">
@@ -166,8 +186,8 @@
           <div class="feat-icon">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
-          <h3>Courses played</h3>
-          <p>Tick off every course you play and chase the lists: The Open venues, every county and all four home nations.</p>
+          <h3>Course challenges</h3>
+          <p>Tick off every course you play and take on the challenges: The Open venues, every county and all four home nations. See your progress after every round.</p>
         </div>
         <div class="feat">
           <div class="feat-icon">
@@ -181,7 +201,7 @@
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <h3>Trusted community</h3>
-          <p>Adults only, with clear guidelines, blocking and reporting, and active moderation.</p>
+          <p>Adults only, with clear guidelines, a friendly reminder in every chat, blocking and reporting, and active moderation.</p>
         </div>
       </div>
     </div>
@@ -239,9 +259,9 @@
       <!-- 05 Share -->
       <div class="shot">
         <div class="shot-tag">05 · Share</div>
-        <div class="shot-title">Your year in golf, <em>ready to post.</em></div>
+        <div class="shot-title">Your golf, <em>ready to post.</em></div>
         <div class="shot-body">
-          <img src="assets/screenshots/15-year-in-golf.png" alt="Year in golf share card" class="shot-screen" />
+          <img src="assets/screenshots/15-year-in-golf.png" alt="Grip share card" class="shot-screen" />
         </div>
       </div>
     </div>
@@ -300,6 +320,6 @@
     </div>
   </footer>
 
-  <script src="main.js?v=4"></script>
+  <script src="main.js?v=5"></script>
 </body>
 </html>

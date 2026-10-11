@@ -123,6 +123,14 @@ img, svg { display: block; max-width: 100%; }
 .waitlist-form button:disabled { opacity: 0.4; cursor: not-allowed; }
 .waitlist-msg { margin-top: 14px; font-size: 14px; color: var(--grip-fairway); display: none; }
 .waitlist-msg.show { display: block; }
+.waitlist-share { margin-top: 16px; max-width: 480px; padding: 16px; background: var(--grip-cream-deep); border-radius: 14px; }
+.waitlist-share[hidden] { display: none; }
+.waitlist-share-title { margin: 0 0 4px; font-family: var(--grip-font-display); font-size: 20px; color: var(--grip-ink); }
+.waitlist-share-sub { margin: 0 0 12px; font-size: 14px; color: var(--grip-ink-70); }
+.waitlist-share-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.waitlist-share-link { flex: 1 1 200px; min-width: 0; overflow-wrap: anywhere; font-family: var(--grip-font-mono); font-size: 12px; color: var(--grip-fairway); }
+.waitlist-share-btn { padding: 10px 16px; border: 0; border-radius: 999px; background: var(--grip-fairway); color: var(--grip-cream); font: inherit; font-size: 14px; cursor: pointer; }
+.waitlist-share-btn:hover { background: var(--grip-fairway-2); }
 .free-tag { margin-top: 20px; font-family: var(--grip-font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grip-ink-55); }
 
 /* Hero app preview — overlapping fanned phone screens */
@@ -328,7 +336,7 @@ img, svg { display: block; max-width: 100%; }
 .legal h2 { font-family: var(--grip-font-display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; margin: 48px 0 14px; }
 .legal h3 { font-family: var(--grip-font-display); font-weight: 500; font-size: 20px; letter-spacing: -0.015em; margin: 28px 0 10px; }
 .legal p, .legal li { color: var(--grip-ink-70); font-size: 15px; line-height: 1.7; margin-bottom: 14px; }
-.legal ul { padding-left: 20px; }
+.legal ul, .legal ol { padding-left: 20px; }
 .legal a { color: var(--grip-fairway); border-bottom: 1px solid var(--grip-rule); }
 
 /* ============ RESPONSIVE ============ */
